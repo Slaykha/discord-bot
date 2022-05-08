@@ -3,7 +3,6 @@ require("dotenv").config()
 
 const generateImage = require("./generateImage")
 
-//alinin aq
 const client = new Discord.Client({
     intents: [
         "GUILDS",
