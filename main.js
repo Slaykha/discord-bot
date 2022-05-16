@@ -2,6 +2,10 @@ const Discord = require("discord.js");
 require("dotenv").config()
 
 const generateImage = require("./generateImage")
+const myMethod = require("./Count.js")
+const count = myMethod.count
+const answer = myMethod.left
+const stop = myMethod.stop
 
 const client = new Discord.Client({
     intents: [
@@ -18,6 +22,25 @@ client.on("ready", () => {
 client.on("messageCreate", message => {
     if(message.content == "!pomodoro"){
         message.reply("Domates?")
+    }
+})
+
+let pomodoroTime = 0
+client.on("messageCreate", message => {
+    if(message.content.startsWith("!pomodoro")){
+        if(message.content.split("!pomodoro ")[1] === "stop"){
+            message.reply(stop())
+        }else{
+            pomodoroTime = parseInt(message.content.split("!pomodoro ")[1]) 
+            message.reply(count(pomodoroTime))
+        }
+              
+    }
+})
+
+client.on("messageCreate", message => {
+    if(message.content.startsWith("!left")){
+        message.reply(answer())
     }
 })
 
